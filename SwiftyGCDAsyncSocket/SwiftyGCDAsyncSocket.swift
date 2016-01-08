@@ -2,7 +2,7 @@
 //  SwiftyGCDAsyncSocket.swift
 //  SwiftyGCDAsyncSocket
 //
-//  Created by Sreejith K R on 08/01/16.
+//  
 // 
 //
 
