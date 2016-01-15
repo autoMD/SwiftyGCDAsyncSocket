@@ -86,12 +86,117 @@ class SwiftyGCDAsyncSocket:NSObject {
     }
     
     func accept(onUrl url:NSURL, error errPtr:AutoreleasingUnsafeMutablePointer<NSError>)->Bool{
+   
+        return false
+    }
+    
+    
+    func connect(toHost host:String, onPort port:Int16, error errorPtr:AutoreleasingUnsafeMutablePointer<NSError>)->Bool{
     return false
     }
 
 
+    func connect(toHost host:String, onPort port:Int16, withTimeout timeout:NSTimeInterval, error errorPtr:AutoreleasingUnsafeMutablePointer<NSError>)->Bool{
+    
+        return false
+        
+    }
     
 
     
+    func connect(toHost host:String, onPort port:Int16, viaInterface interface:String,withTimeout timeout:NSTimeInterval, error errorPtr:AutoreleasingUnsafeMutablePointer<NSError>)->Bool{
+        
+        return false
+        
+    }
+    
+    func connect(toAddress remoteAddr:NSData,  error errorPtr:AutoreleasingUnsafeMutablePointer<NSError>)->Bool{
+        return false
+    }
+    
+    func connect(toAddress remoteAddr:NSData,withTimeout timeout:NSTimeInterval, error errorPtr:AutoreleasingUnsafeMutablePointer<NSError>)->Bool{
+        return false
+    }
+    func connect(toAddress remoteAddr:NSData, viaInterface interface:String,withTimeout timeout:NSTimeInterval, error errorPtr:AutoreleasingUnsafeMutablePointer<NSError>)->Bool{
+        return false
+    }
+    
+    func connect(toUrl url:NSURL,withTimeout timeout:NSTimeInterval, error errorPtr:AutoreleasingUnsafeMutablePointer<NSError>)->Bool{
+        return false
+    }
+    
+    func disconnect(){
+    
+    }
+    
+    func disconnectAfterReading(){
+    
+    }
+    
+    func disconnectAfterWriting(){
+    
+    
+    }
+    
+    func disconnectAfterReadingAndWriting(){
+    
+    }
+    
+    var isDisconnected:Bool = true;
+    var isConnected:Bool = false;
 
+    
+    private(set) var connectedHost:String!
+     private(set) var connectedPort:Int16!
+    private(set) var connectedURl:NSURL!
+    private(set) var localHost:String!
+    private(set) var localPort:Int16!
+    private(set) var  ConnectedAddress:NSData!
+    private(set) var  localAddress:NSData!
+    private(set) var isIPV4:Bool!
+    private(set) var isIPV6:Bool!
+    private(set) var isSecure:Bool!
+    
+
+    func readData(timeout:NSTimeInterval,tag:Int){
+    
+    }
+
+    func readData(timeout:NSTimeInterval,buffer:NSMutableData,bufferOffset offset:Int,tag:Int){
+        
+    }
+    
+    func readData(timeout:NSTimeInterval,buffer:NSMutableData,bufferOffset offset:Int,maxLength length:Int,tag:Int){
+        
+    }
+    func readData(toLength length:Int, withTimeout timeout:NSTimeInterval,tag:Int){
+    
+    }
+
+    func readData(toLength length:Int, withTimeout timeout:NSTimeInterval,buffer:NSMutableData,bufferOffset offset:Int,tag:Int){
+        
+    }
+    
+
+    func readData(toData data:NSData, withTimeout timeout:NSTimeInterval,tag:Int){
+        
+    }
+    
+    func readData(toData data:NSData, withTimeout timeout:NSTimeInterval,buffer:NSMutableData,bufferOffset offset:Int,tag:Int){
+        
+    }
+    
+    func readData(toData data:NSData, withTimeout timeout:NSTimeInterval, maxLength length:Int,tag:Int){
+        
+    }
+    
+    func readData(toData data:NSData, withTimeout timeout:NSTimeInterval,buffer:NSMutableData,bufferOffset offset:Int,maxLength length:Int,tag:Int){
+        
+    }
+    
+    func progressOfWrite(returningTag tagPtr:UnsafeMutablePointer<Int>,bytesDone donePtr:UnsafeMutablePointer<Int>, total totalPtr:UnsafeMutablePointer<Int>){
+    
+    }
+    
 }
+
