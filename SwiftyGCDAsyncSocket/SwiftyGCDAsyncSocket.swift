@@ -6,7 +6,27 @@
 // 
 //
 
+
+//#if TARGET_OS_IPHONE
+//    #import <CFNetwork/CFNetwork.h>
+//#endif
+//
+//#import <TargetConditionals.h>
+//#import <arpa/inet.h>
+//#import <fcntl.h>
+//#import <ifaddrs.h>
+//#import <netdb.h>
+//#import <netinet/in.h>
+//#import <net/if.h>
+//#import <sys/socket.h>
+//#import <sys/types.h>
+//#import <sys/ioctl.h>
+//#import <sys/poll.h>
+//#import <sys/uio.h>
+//#import <sys/un.h>
+//#import <unistd.h>
 import Foundation
+import Darwin
 
 let  SwiftyGCDAsyncSocketException = "SwiftyGCDAsyncSocketException"
 let SwiftyGCDAsyncSocketErrorDomain = "SwiftyGCDAsyncSocketErrorDomain"
@@ -39,8 +59,25 @@ enum SwiftyGCDAsyncSocketError:Int{
     OtherError;            // Description provided in userInfo
 }
 
-class SwiftyGCDAsyncSocketDelegate:AnyObject{
-
+protocol SwiftyGCDAsyncSocketDelegate:AnyObject{
+    
+  
+    
+    func newSocketQueueForConnectionFromAddress(address:NSData,onSocket sock:SwiftyGCDAsyncSocket)->dispatch_queue_t;
+    func socket(sock:SwiftyGCDAsyncSocket,didAcceptNewSocket newSocket:SwiftyGCDAsyncSocket)
+    func socket(sock:SwiftyGCDAsyncSocket,didConnectToHost host:String,port:Int16)
+    func socket(sock:SwiftyGCDAsyncSocket,didConnectToUrl url:NSURL)
+    func socket(sock:SwiftyGCDAsyncSocket, didReadData data:NSData, withTag tag:Int)
+     func socket(sock:SwiftyGCDAsyncSocket, didReadPartialDataOfLength partialLength:Int, tag:Int)
+    func socket(sock:SwiftyGCDAsyncSocket, didWriteDataWithTag tag:Int)
+    func socket(sock:SwiftyGCDAsyncSocket,didWritePartialDataOfLength partialLength:Int, tag:Int)
+    func socket(sock:SwiftyGCDAsyncSocket, shouldTimeoutReadWithTag tag:Int, elapsed:NSTimeInterval,bytesDone length:Int)->NSTimeInterval
+     func socket(sock:SwiftyGCDAsyncSocket, shouldTimeoutWriteWithTag tag:Int, elapsed:NSTimeInterval,bytesDone length:Int)->NSTimeInterval
+    func socketDidCloseReadStream(sock:SwiftyGCDAsyncSocket)
+    func socketDidDisconnect(sock:SwiftyGCDAsyncSocket,withError err:NSError)
+    func socketDidSecure(sock:SwiftyGCDAsyncSocket)
+    func socket(sock:SwiftyGCDAsyncSocket,didReceiveTrust trust:SecTrustRef ,completionHandler:((shouldTrustPeer:Bool)->()))
+    
 }
 class SwiftyGCDAsyncSocket:NSObject {
     
@@ -198,5 +235,101 @@ class SwiftyGCDAsyncSocket:NSObject {
     
     }
     
+    func startTLS(tlsSettings:[String:AnyObject]){
+    
+    }
+    
+    var autoDisconnectOnClosedReadStream:Bool = true
+    
+
+    
+    func markSocketQueueTargetQueue(socketQueuesPreConfiguredTargetQueue:dispatch_queue_t){
+    
+    }
+    
+
+    func unmarkSocketQueueTargetQueue(socketQueuesPreviouslyConfiguredTargetQueue:dispatch_queue_t){
+    
+    }
+
+    func performBlock(block:dispatch_block_t){
+    
+    }
+   
+    
+    func socketFD()->Int{
+        return 0;
+    }
+    
+    func socket4FD()->Int{
+     return 0
+    }
+    
+    func socket6FD()->Int{
+    return 0
+    }
+    
+    //- (CFReadStreamRef)readStream;
+    //- (CFWriteStreamRef)writeStream;
+    
+    func readStream()->CFReadStreamRef{
+        let readStream:CFReadStreamRef! = nil;
+
+    return readStream
+    }
+    func writeStream()->CFWriteStreamRef{
+        let readStream:CFWriteStreamRef! = nil;
+        
+        return readStream
+    }
+    
+    func enableBackgroundingOnSocket()->Bool{
+        return true;
+    }
+    func sslContext()->SSLContextRef{
+        let sSLContextTemp:SSLContext! = nil
+    return sSLContextTemp
+    }
+    
+    
+    class func lookup(host:String,port:Int16,error errorPtr:AutoreleasingUnsafeMutablePointer<NSError>)->[String:AnyObject]{
+        
+        return [:];
+    }
+    class func hostFromAddress(address:NSData)->String{
+    return ""
+    }
+    class func portFromAddress(address:NSData)->Int16{
+        return 0
+    }
+    class func isIPv4Address(address:NSData)->Bool{
+        return true
+    }
+    class func isIPv6Address(address:NSData)->Bool{
+        return true
+    }
+    class func get(host hostPtr:AutoreleasingUnsafeMutablePointer<String>,port portPtr:AutoreleasingUnsafeMutablePointer<Int16>,fromAddress address:AutoreleasingUnsafeMutablePointer<NSData>)->Bool{
+    return true
+    }
+    class func get(host hostPtr:AutoreleasingUnsafeMutablePointer<String>,port portPtr:AutoreleasingUnsafeMutablePointer<Int16>,family afPtr:sa_family_t,fromAddress address:AutoreleasingUnsafeMutablePointer<NSData>)->Bool{
+        return true
+    }
+    
+    class func CRLFData()->NSData{
+        return NSData()
+    }
+    class func CRData()->NSData{
+        return NSData()
+    }
+    class func LFData()->NSData{
+        return NSData()
+    }
+    class func ZeroData()->NSData{
+        return NSData()
+    }
+    
+    
 }
+
+
 
